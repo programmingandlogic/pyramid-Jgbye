@@ -1,0 +1,55 @@
+/*
+ * File: Pyramid.java
+ * ------------------
+ * This program is a stub for the Pyramid problem, which draws
+ * a brick pyramid.
+ */
+
+import acm.program.*;
+import acm.graphics.*;
+import java.awt.*;
+
+
+public class Pyramid extends GraphicsProgram {
+	
+	//This defines the variable brickCursorX.
+	int brickCursorX;
+	
+	//This defines the variable brickCursorY
+	int brickCursorY;
+	
+	//This defines the variable baseBrickNumber
+	int baseBrickNumber;
+	
+	//This creates the next layer.
+	private void nextLayer() {
+		brickCursorX = brickCursorX - (baseBrickNumber * 30) + 15 ;
+		brickCursorY = brickCursorY - 12;
+		baseBrickNumber = baseBrickNumber - 1;
+	}
+	//This makes each makes each layer
+	private void makeLayer() {
+		for(int i=1; i<=baseBrickNumber; i++) {
+			addBrick();
+		}
+	}
+	//This creates and adds each brick 
+	private void addBrick() {	
+			GRect brick = new GRect(brickCursorX, brickCursorY, 30, 12);
+			brick.setColor(Color.BLACK);
+			add (brick);
+			brickCursorX = brickCursorX + 30;
+	}
+	//This is the main program. It asks you to enter the amount of
+	//bricks for the base, and then runs makeLayer and nextLayer
+	public void run() {
+		baseBrickNumber = readInt("Enter number of base bricks: ");
+		println("Please open the graphics window.");
+		brickCursorX = ((getWidth() / 2) - (baseBrickNumber * 15));
+		brickCursorY = (getHeight() - 24);
+		for(int i=1; 1<=baseBrickNumber; i++) {
+			makeLayer();
+			nextLayer();
+		}
+	}
+}
